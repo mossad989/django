@@ -1,0 +1,35 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0"
+    />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Document</title>
+    <link rel="stylesheet" href="{% static 'moj.css' %}" />
+  </head>
+  <body>
+    <a href="{% url 'login' %}">Login</a>
+    <a href="{% url 'logout' %}">Logout</a>
+
+    <hr />
+
+    <a href="{% url 'nowy_film' %}">Nowy film</a>
+
+    {% if filmy|length == 0 %}
+    <h3>Brak filmów</h3>
+    {% else %}
+
+    <h2>Ilość filmów w BD: {{ filmy|length }}</h2>
+
+    {% for film in filmy %}
+    <h2>{{ film }}</h2>
+    <p>{{ film.opis }}</p>
+    <a href="{% url 'edytuj_film' film.id %}">Edytuj</a>
+    <a href="{% url 'usun_film' film.id %}">Usuń</a>
+    {% endfor %}{% endif %}
+  </body>
+</html>
